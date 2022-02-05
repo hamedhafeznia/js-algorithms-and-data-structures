@@ -42,7 +42,64 @@ class SinglyLinkedList {
             this.tail = null;
         }
         return current;
+    }
 
+    shift() {
+        if(!this.head) return undefined;
+        var currentHead = this.head;
+        this.head = currentHead.next;
+        this.length--;
+        if(this.length === 0) {
+            this.tail = null;
+        }
+        return currentHead;
+    }
+
+    unShift(val) {
+        var newNode = new Node(val)
+        if(!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+        }
+        newNode.next = this.head;
+        this.head = newNode;
+        this.length++;
+        return this
+
+    }
+
+
+    get(index) {
+        if(index < 0 || index > this.length) return undefined;
+        var counter = 0;
+        var current = this.head;
+        while( counter !== index ) {
+            current = current.next;
+            counter++;
+        }
+        return current;
+    }
+
+    set(index, value) {
+        var foundValue = this.get(index)
+        if(foundValue) {
+            foundValue.val = value
+            return true
+        }
+        return false
+    }
+
+    insert(index, val) {
+        if(index < 0 || index > this.length) return false
+        if(index === this.length) return !!this.push(val);
+        if(index === 0) return !!this.unShift(val)
+        var newNode = new Node(val);
+        var prev = this.get(index - 1)
+        var temp = prev.next
+        prev.next = newNode;
+        newNode.next = temp;
+        this.length++;
+        return true;
     }
 }
 
