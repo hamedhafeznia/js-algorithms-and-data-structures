@@ -57,5 +57,80 @@ class DubublyLinkedList {
         this.length++;
         return this;
     }
+
+    get(index) {
+        if(index < 0 || index >= this.length) {
+            return null
+        }
+
+        if(index <= this.length/2) {
+            var count = 0;
+            var current = this.head;
+            while (count !== index) {
+                current = current.next
+                count++
+            }
+            return current
+        } else {
+            var count = this.length - 1;
+            var current = this.tail;
+            while (count !== index) {
+                current = current.prev
+                count--
+            }
+            return current
+        }
+    }
+
+    set(index, value) {
+        var result = this.get(index)
+        if(result != null) {
+            result.val = value
+            return true
+        } else {
+            return false
+        }
+    }
+
+    insert(index, value) {
+        if(index > this.length || index < 0) {
+            return false
+        }
+        if(index === 0) {
+            this.unshift(value)
+            
+        }
+        if(index === this.length) {
+            this.push(value)
+        } 
+        else {
+            
+            var beforNode = this.get(index-1)   
+            var afterNode = beforNode.next
+            var newNode = new Node(value)
+            
+            beforNode.next = newNode , newNode.prev = beforNode
+            newNode.next = afterNode , afterNode.prev = newNode
+            this.length++
+            return true
+            
+        }
+    }
+
+    remove(index) {
+        if(index < 0 || index >= this.length) return undefined
+        if(index === 0) !!this.shift()
+        if(index === this.length - 1) !!this.pop()
+
+        var removeNodes = this.get(index)
+        removeNodes.prev.next = removeNodes.next;
+        removeNodes.next.prev = removeNodes.prev;
+        removeNodes.next = null;
+        removeNodes.prev = null;
+        this.length--;
+        return removeNodes
+        
+    }
+
     
 }
