@@ -12,6 +12,8 @@ class Queue {
     this.size = 0;
   }
 
+  //FIFO(first in first out)
+  //adding from last
   enQueue(val) {
     var newNode = new Node(val);
     if (!this.first) {
@@ -24,6 +26,7 @@ class Queue {
     return ++this.size;
   }
 
+  //Removing from first
   deQueue() {
     if (!this.first) {
       return null;

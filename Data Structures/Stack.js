@@ -12,6 +12,7 @@ class Stack {
     this.size = null;
   }
 
+  //Addig from last
   push(val) {
     var newNode = new Node(val);
     if (!this.first) {
@@ -25,6 +26,8 @@ class Stack {
     return ++this.size;
   }
 
+
+  //Removing from first
   pop() {
     if (!this.first) {
       return null;
