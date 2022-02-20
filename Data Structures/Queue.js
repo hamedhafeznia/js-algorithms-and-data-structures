@@ -35,8 +35,9 @@ class Queue {
     } else {
       var temp = this.first;
       this.first = this.first.next;
-      return temp.value;
       this.size--;
+      return temp.value;
+      
     }
   }
 }
